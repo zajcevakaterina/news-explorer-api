@@ -9,7 +9,7 @@ const AuthErr = require('../errors/auth-error');
 const getUserById = (req, res, next) => User.findById(req.user._id)
   .then((user) => {
     if (!user) {
-      throw new NotFoundErr({ message: 'Нет пользователя с таким id' });
+      throw new NotFoundErr('Нет пользователя с таким id');
     }
     res.status(200).send(user);
   })
@@ -30,12 +30,10 @@ const createUser = (req, res, next) => {
     }))
     .catch((err) => {
       if (err.name === 'MongoError' && err.code === 11000) {
-        throw new ConflictError({
-          message: 'Пользователь с таким email уже зарегистрирован',
-        });
+        throw new ConflictError('Пользователь с таким email уже зарегистрирован');
       } else next(err);
     })
-    .then((user) => res.send({ message: `Пользователь c email ${user.email} успешно зарегистрирован` }))
+    .then((user) => res.send(`Пользователь c email ${user.email} успешно зарегистрирован`))
     .catch(next);
 };
 
