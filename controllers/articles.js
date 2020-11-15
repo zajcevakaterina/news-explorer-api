@@ -51,7 +51,7 @@ const deleteArticle = (req, res, next) => {
         throw new ForbiddenErr('Удалять можно только свои статьи');
       } else {
         Article.findByIdAndDelete(req.params.id)
-          .then(() => res.status(200).send('Статья удалена'))
+          .then(() => res.status(200).send({ message: 'Статья удалена' }))
           .catch(next);
       }
     })
