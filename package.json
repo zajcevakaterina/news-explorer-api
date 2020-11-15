@@ -1,0 +1,37 @@
+{
+  "name": "news-explorer-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zajcevakaterina/news-explorer-api.git"
+  },
+  "author": "Ekaterina Zaytseva",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/zajcevakaterina/news-explorer-api/issues"
+  },
+  "homepage": "https://github.com/zajcevakaterina/news-explorer-api#readme",
+  "devDependencies": {
+    "eslint": "^7.13.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-plugin-import": "^2.22.1",
+    "nodemon": "^2.0.6"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "celebrate": "^13.0.4",
+    "express": "^4.17.1",
+    "express-rate-limit": "^5.1.3",
+    "express-winston": "^4.0.5",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.10.14",
+    "validator": "^13.1.17",
+    "winston": "^3.3.3"
+  }
+}
