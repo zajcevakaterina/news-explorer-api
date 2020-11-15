@@ -2,6 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const rateLimit = require('express-rate-limit');
 const mongoose = require('mongoose');
+const bodyParser = require('body-parser');
 const { celebrate, Joi, errors } = require('celebrate');
 const articlesRouter = require('./routes/articles');
 const usersRouter = require('./routes/users');
@@ -27,6 +28,8 @@ mongoose.connect('mongodb://localhost:27017/mestodb', {
 app.use(limiter);
 
 app.use(cors());
+
+app.use(bodyParser.json());
 
 app.use(requestLogger);
 

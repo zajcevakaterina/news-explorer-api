@@ -22,7 +22,7 @@ const userSchema = new mongoose.Schema({
       message: 'Неверно задана почта',
     },
   },
-  password: { // TODO: хэш??
+  password: {
     type: String,
     required: true,
     select: false,
