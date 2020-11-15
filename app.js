@@ -6,7 +6,7 @@ const rateLimit = require('express-rate-limit');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const routes = require('./routes/index');
-const { requestLogger, errorLogger } = require('./middlewares/logger.js');
+const { requestLogger, errorLogger } = require('./middlewares/logger');
 
 const app = express();
 
