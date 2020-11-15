@@ -13,6 +13,7 @@ const getSavedArticles = (req, res, next) => Article.find({})
   .catch(next);
 
 const createArticle = (req, res, next) => {
+  console.log(req);
   const {
     keyword,
     title,

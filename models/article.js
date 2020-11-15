@@ -1,8 +1,5 @@
-// const bcrypt = require('bcryptjs');
 const { isURL } = require('validator');
 const mongoose = require('mongoose');
-
-// const AuthErr = require('../errors/auth-error');
 
 const articleSchema = new mongoose.Schema({
   keyword: {
