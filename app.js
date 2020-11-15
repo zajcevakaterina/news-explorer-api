@@ -1,4 +1,6 @@
 const express = require('express');
+const cors = require('cors');
+const rateLimit = require('express-rate-limit');
 const mongoose = require('mongoose');
 const { celebrate, Joi, errors } = require('celebrate');
 const articlesRouter = require('./routes/articles');
@@ -6,16 +8,25 @@ const usersRouter = require('./routes/users');
 const { createUser, login } = require('./controllers/users');
 const auth = require('./middlewares/auth');
 const { requestLogger, errorLogger } = require('./middlewares/logger.js');
-
 const NotFoundErr = require('./errors/not-found-error');
 
 const app = express();
+
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 100,
+  message: 'Пожалуйста, попробуйте позже',
+});
 
 mongoose.connect('mongodb://localhost:27017/mestodb', {
   useNewUrlParser: true,
   useCreateIndex: true,
   useFindAndModify: false,
 });
+
+app.use(limiter);
+
+app.use(cors());
 
 app.use(requestLogger);
 
