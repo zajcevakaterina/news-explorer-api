@@ -1,16 +1,12 @@
 require('dotenv').config();
 const express = require('express');
+const { errors } = require('celebrate');
 const cors = require('cors');
 const rateLimit = require('express-rate-limit');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
-const { celebrate, Joi, errors } = require('celebrate');
-const articlesRouter = require('./routes/articles');
-const usersRouter = require('./routes/users');
-const { createUser, login } = require('./controllers/users');
-const auth = require('./middlewares/auth');
+const routes = require('./routes/index');
 const { requestLogger, errorLogger } = require('./middlewares/logger.js');
-const NotFoundErr = require('./errors/not-found-error');
 
 const app = express();
 
@@ -35,29 +31,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(requestLogger);
 
-app.post('/signup', celebrate({
-  body: Joi.object().keys({
-    name: Joi.string().required().min(3).max(20),
-    email: Joi.string().required().email(),
-    password: Joi.string().required().min(6),
-  }),
-}), createUser);
-
-app.post('/signin', celebrate({
-  body: Joi.object().keys({
-    email: Joi.string().required().email(),
-    password: Joi.string().required().min(6),
-  }),
-}), login);
-
-app.use(auth);
-
-app.use(articlesRouter);
-app.use(usersRouter);
-
-app.all('*', (req, res, next) => {
-  next(new NotFoundErr({ message: 'Запрашиваемый ресурс не найден' }));
-});
+app.use(routes);
 
 app.use(errorLogger);
 

@@ -8,8 +8,8 @@ const {
   deleteArticle,
 } = require('../controllers/articles');
 
-articlesRouter.get('/articles', getSavedArticles);
-articlesRouter.post('/articles', celebrate({
+articlesRouter.get('/', getSavedArticles);
+articlesRouter.post('/', celebrate({
   body: Joi.object().keys({
     keyword: Joi.string().required(),
     title: Joi.string().required(),
@@ -27,7 +27,7 @@ articlesRouter.post('/articles', celebrate({
   }),
 }), createArticle);
 
-articlesRouter.delete('/articles/:id', celebrate({
+articlesRouter.delete('/:id', celebrate({
   params: Joi.object().keys({
     id: Joi.string().required().hex().length(24),
   }),
