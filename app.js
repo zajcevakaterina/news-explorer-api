@@ -33,16 +33,20 @@ app.use(bodyParser.json());
 
 app.use(requestLogger);
 
-const userJoiSchema = {
+app.post('/signup', celebrate({
+  body: Joi.object().keys({
+    name: Joi.string().required().min(3).max(20),
+    email: Joi.string().required().email(),
+    password: Joi.string().required().min(6),
+  }),
+}), createUser);
+
+app.post('/signin', celebrate({
   body: Joi.object().keys({
     email: Joi.string().required().email(),
     password: Joi.string().required().min(6),
   }),
-};
-
-app.post('/signup', celebrate(userJoiSchema), createUser);
-
-app.post('/signin', celebrate(userJoiSchema), login);
+}), login);
 
 app.use(auth);
 
