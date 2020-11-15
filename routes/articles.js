@@ -16,7 +16,7 @@ articlesRouter.post('/', celebrate({
     text: Joi.string().required(),
     date: Joi.string().required(),
     source: Joi.string().required(),
-    url: Joi.string().required().custom((value, helpers) => {
+    link: Joi.string().required().custom((value, helpers) => {
       if (!isURL(value)) return helpers.error('К сожалению, ссылка не прошла валидацию');
       return value;
     }),
