@@ -33,7 +33,7 @@ const createUser = (req, res, next) => {
         throw new ConflictError('Пользователь с таким email уже зарегистрирован');
       } else next(err);
     })
-    .then((user) => res.send(`Пользователь c email ${user.email} успешно зарегистрирован`))
+    .then((user) => res.send({ message: `Пользователь c email ${user.email} успешно зарегистрирован` }))
     .catch(next);
 };
 
